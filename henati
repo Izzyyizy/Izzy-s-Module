@@ -1,4 +1,4 @@
- {
+{
    "moduleName": "nHentai",
    "moduleInitials": "NH",
    "moduleDesc": "A module to browse nHentai content within the Zetsu app. This file contains all logic inline.",
