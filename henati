@@ -1,0 +1,62 @@
+{
+   "moduleName": "nHentai",
+   "moduleInitials": "NH",
+   "moduleDesc": "A module to browse nHentai content within the Zetsu app. This file contains all logic inline.",
+   "developer": "YourName",
+   "moduleID": "nhentai.yourname",
+   "moduleImage": "nhentai.net",
+   "moduleVersion": "1.0.0",
+   "moduleLenguage": "en",
+   "moduleHasImages": "true",
+   "outputType": "image",
+   "randomizeUserAgent": "true",
+   "baseURL": "https://nhentai.net",
+   "blackListed": [""],
+   "mainPage": [{
+      "request": "/?page=<page>",
+      "method": "get",
+      "headers": [],
+      "extraInfo": [{"value": "1"}, {"value": ""}, {"value": ""}, {"value": ""}, {"value": ""}],
+      "loadJavascript": "false",
+      "javaScript": "function mainPageScript() { const mangas = document.querySelectorAll('.gallery'); const mangasArray = []; mangas.forEach(manga => { const image = manga.querySelector('img').src; const link = manga.querySelector('a').href; const title = manga.querySelector('.caption').textContent.trim(); mangasArray.push({ moduleID: '0', image, link, title }); }); return [{ sectionName: 'Latest Uploads', mangasArray }]; } mainPageScript();",
+      "output": [{"sectionName": "Latest", "mangasArray": [{"moduleID": "0", "image": "manga.querySelector('img').src", "link": "manga.querySelector('a').href", "title": "manga.querySelector('.caption').textContent.trim()"}]}]
+   }],
+   "search": [{
+      "request": "/search/?q=<searched>&page=<page>",
+      "method": "get",
+      "headers": [],
+      "separator": "+",
+      "extraInfo": [{"value": "1"}],
+      "loadJavascript": "false",
+      "javaScript": "function searchScript() { const mangas = document.querySelectorAll('.gallery'); const mangasArray = []; mangas.forEach(manga => { const image = manga.querySelector('img').src; const link = manga.querySelector('a').href; const title = manga.querySelector('.caption').textContent.trim(); mangasArray.push({ moduleID: '0', image, link, title, type: '', voice: '', stars: '' }); }); return mangasArray; } searchScript();",
+      "output": [{"moduleID": "0", "image": "manga.querySelector('img').src", "link": "manga.querySelector('a').href", "title": "manga.querySelector('.caption').textContent.trim()", "type": "", "voice": "", "stars": ""}]
+   }],
+   "info": [{
+      "request": "get",
+      "method": "get",
+      "headers": [],
+      "extraInfo": [{"value": ""}],
+      "loadJavascript": "false",
+      "javaScript": "function infoScript() { const image = document.querySelector('#cover img').src; const link = window.location.href; const title = document.querySelector('#info h1').textContent.trim(); const description = document.querySelector('#tags').textContent.trim(); const genres = Array.from(document.querySelectorAll('#tags .tag-container:not(:first-child) a')).map(tag => tag.textContent.trim().split('\\n')); const type = document.querySelector('#tags .tag-container a').textContent.trim().split('\\n'); const status = 'Completed'; const chapters = [{ link: window.location.href, moduleID: '0' }]; return { moduleID: '0', image, link, title, description, genres, type, status, chapters }; } infoScript();",
+      "output": {
+         "moduleID": "0",
+         "image": "document.querySelector('#cover img').src",
+         "link": "window.location.href",
+         "title": "document.querySelector('#info h1').textContent.trim()",
+         "description": "document.querySelector('#tags').textContent.trim()",
+         "genres": ["Array.from(document.querySelectorAll('#tags .tag-container:not(:first-child) a')).map(tag => tag.textContent.trim().split('\\n'))"],
+         "type": "document.querySelector('#tags .tag-container a').textContent.trim().split('\\n')",
+         "status": "Completed",
+         "chapters": [{"link": "window.location.href", "moduleID": "0"}]
+      }
+   }],
+   "chapters": [{
+      "request": "get",
+      "method": "get",
+      "headers": [],
+      "extraInfo": [{"value": ""}],
+      "loadJavascript": "false",
+      "javaScript": "function chaptersScript() { const images = document.querySelectorAll('#thumbnail-container img'); const pagesArray = []; images.forEach(image => { pagesArray.push({ link: image.src, moduleID: '0', headers: [] }); }); return pagesArray; } chaptersScript();",
+      "output": [{"link": "image.src", "moduleID": "0", "headers": []}]
+   }]
+}
