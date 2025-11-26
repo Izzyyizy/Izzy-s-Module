@@ -1,0 +1,1 @@
+{"module":"Nhentai","data":{"description":"Nhentai module for Zetsu.","version":"1.0.0","author":"Izzyyizy","settings":{"apiEndpoint":"https://nhentai.net/api/","timeout":5000}}}
