@@ -1,0 +1,112 @@
+{
+    "moduleInfo": {
+        "moduleName": "Nhentai",
+        "moduleInitials": "NH",
+        "moduleDesc": "Browse and read content directly from Nhentai.",
+        "developer": "Izzyyizy",
+        "moduleID": "Nhentai_Ultimate",
+        "moduleImage": "https://cdn.nhentai.net/favicon.ico",
+        "moduleVersion": 1.0,
+        "moduleLenguage": "ENG",
+        "moduleType": "Image",
+        "baseURL": "https://nhentai.net/",
+        "moduleDeveloperSite": "https://nhentai.net/",
+        "UpdateSite": "",
+        "preferedServer": "",
+        "preferedDownloadServer": "",
+        "blackListed": [
+            ""
+        ]
+    },
+    "global": {
+        "variables": [],
+        "cookies": [],
+        "headers": [
+            {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0"
+            }
+        ]
+    },
+    "mainPage": [
+        {
+            "request": {
+                "url": "https://nhentai.net/",
+                "method": "get",
+                "headers": [],
+                "httpBody": null
+            },
+            "extra": {
+                "commands": [],
+                "extraInfo": []
+            },
+            "javascriptConfig": {
+                "removeJavascript": true,
+                "loadInWebView": false,
+                "javaScript": "function MainPage(request, extra, javascriptConfig, output) { this.request = request; this.extra = extra; this.javascriptConfig = javascriptConfig; this.output = output;}function ModuleRequest(url, method, headers, httpBody) { this.url = url; this.method = method; this.headers = headers; this.httpBody = httpBody;}function Output(cellDesing, orientation, defaultLayout, paging, section, layout, data) { this.cellDesing = cellDesing; this.orientation = orientation; this.defaultLayout = defaultLayout; this.paging = paging; this.section = section; this.layout = layout; this.data = data;}function Data(image, title, description, field1, field2, field3, field4, isChapter, link) { this.image = image; this.title = title; this.description = description; this.field1 = field1; this.field2 = field2; this.field3 = field3; this.field4 = field4; this.isChapter = isChapter; this.link = link;}let emptyKeyValue = [{key: '', value: ''}];let results = [];let elements = document.querySelectorAll('.gallery a.cover');for (let element of elements) {let image = element.querySelector('img').getAttribute('data-src');let link = element.href;let title = element.getAttribute('title');results.push(new Data(image, title, '', '', '', '', '', false, new ModuleRequest(link, 'get', emptyKeyValue, null)));}let output = [];output.push(new Output('wide11', 'vertical', 'longTripletsFull', 'none', {sectionName: 'Latest Uploads', separator: false}, null, results));let MainPageObject = new MainPage(new ModuleRequest('', 'get', emptyKeyValue, null), null, {removeJavascript: true, loadInWebView: false, javaScript: ''}, output);document.getElementById('ketsu-final-data').innerHTML = JSON.stringify(MainPageObject);"
+            },
+            "output": []
+        }
+    ],
+    "search": [
+        {
+            "request": {
+                "url": "https://nhentai.net/search/?q=<searched>&page=<page>",
+                "method": "get",
+                "headers": [],
+                "httpBody": null
+            },
+            "separator": "+",
+            "extra": {
+                "commands": [],
+                "extraInfo": []
+            },
+            "javascriptConfig": {
+                "removeJavascript": true,
+                "loadInWebView": false,
+                "javaScript": "function Search(request, extra, separator, javascriptConfig, output) { this.request = request; this.extra = extra; this.separator = separator; this.javascriptConfig = javascriptConfig; this.output = output;}function ModuleRequest(url, method, headers, httpBody) { this.url = url; this.method = method; this.headers = headers; this.httpBody = httpBody;}function Output(cellDesing, orientation, defaultLayout, paging, section, layout, data) { this.cellDesing = cellDesing; this.orientation = orientation; this.defaultLayout = defaultLayout; this.paging = paging; this.section = section; this.layout = layout; this.data = data;}function Data(image, title, description, field1, field2, field3, field4, isChapter, link) { this.image = image; this.title = title; this.description = description; this.field1 = field1; this.field2 = field2; this.field3 = field3; this.field4 = field4; this.isChapter = isChapter; this.link = link;}let emptyKeyValue = [{key: '', value: ''}];let results = [];let elements = document.querySelectorAll('.gallery a.cover');for (let element of elements) {let image = element.querySelector('img').getAttribute('data-src');let link = element.href;let title = element.getAttribute('title');results.push(new Data(image, title, '', '', '', '', '', false, new ModuleRequest(link, 'get', emptyKeyValue, null)));}let output = [];output.push(new Output('wide11', 'vertical', 'longTripletsFull', 'none', {sectionName: 'Search Results', separator: false}, null, results));let SearchPageObject = new Search(new ModuleRequest('', 'get', emptyKeyValue, null), null, '', {removeJavascript: true, loadInWebView: false, javaScript: ''}, output);document.getElementById('ketsu-final-data').innerHTML = JSON.stringify(SearchPageObject);"
+            },
+            "output": []
+        }
+    ],
+    "info": [
+        {
+            "request": {
+                "url": "https://nhentai.net/g/<id>",
+                "method": "get",
+                "headers": [],
+                "httpBody": null
+            },
+            "extra": {
+                "commands": [],
+                "extraInfo": []
+            },
+            "javascriptConfig": {
+                "removeJavascript": true,
+                "loadInWebView": false,
+                "javaScript": "function Info(request, extra, javascriptConfig, output) { this.request = request; this.extra = extra; this.javascriptConfig = javascriptConfig; this.output = output;}function ModuleRequest(url, method, headers, httpBody) { this.url = url; this.method = method; this.headers = headers; this.httpBody = httpBody;}function Output(image, title, description, field1, field2, field3, field4, chapters) { this.image = image; this.title = title; this.description = description; this.field1 = field1; this.field2 = field2; this.field3 = field3; this.field4 = field4; this.chapters = chapters;}function Chapter(chapName, link) { this.chapName = chapName; this.link = link;}let emptyKeyValue = [{key: '', value: ''}];let image = document.querySelector('#cover img').src;let title = document.querySelector('#info h1').textContent.trim();let description = '';let genres = Array.from(document.querySelectorAll('#tags .tag-container span.name')).map(e => e.textContent.trim());let chapters = [];let images = Array.from(document.querySelectorAll('.thumb-container img')).map(e => new ModuleRequest(e.getAttribute('data-src'), 'get', emptyKeyValue, null));for (let i = 0; i < images.length; i++) { chapters.push(new Chapter(`Page ${i + 1}`, images[i]));}let output = new Output(new ModuleRequest(image, 'get', emptyKeyValue, null), title, description, genres.join(', '), '', '', '', chapters);let InfoPageObject = new Info(new ModuleRequest('', 'get', emptyKeyValue, null), null, {removeJavascript: true, loadInWebView: false, javaScript: ''}, output);document.getElementById('ketsu-final-data').innerHTML = JSON.stringify(InfoPageObject);"
+            },
+            "output": []
+        }
+    ],
+    "chapters": [
+        {
+            "request": {
+                "url": "https://nhentai.net/g/<id>/",
+                "method": "get",
+                "headers": [],
+                "httpBody": null
+            },
+            "extra": {
+                "commands": [],
+                "extraInfo": []
+            },
+            "javascriptConfig": {
+                "removeJavascript": true,
+                "loadInWebView": false,
+                "javaScript": "function Chapters(request, extra, javascriptConfig, output) { this.request = request; this.extra = extra; this.javascriptConfig = javascriptConfig; this.output = output;}function ModuleRequest(url, method, headers, httpBody) { this.url = url; this.method = method; this.headers = headers; this.httpBody = httpBody;}function Output(images) { this.images = images;}let emptyKeyValue = [{key: '', value: ''}];let images = Array.from(document.querySelectorAll('.thumb-container img')).map(e => new ModuleRequest(e.getAttribute('data-src'), 'get', emptyKeyValue, null));let chaptersObject = new Chapters(new ModuleRequest('', 'get', emptyKeyValue, null), null, {removeJavascript: true, loadInWebView: false, javaScript: ''}, new Output(images));document.getElementById('ketsu-final-data').innerHTML = JSON.stringify(chaptersObject);"
+            },
+            "output": []
+        }
+    ]
+}
